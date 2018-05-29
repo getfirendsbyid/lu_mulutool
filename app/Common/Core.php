@@ -3,6 +3,7 @@ namespace script;
 
 use function GuzzleHttp\Psr7\str;
 use Tmkook\Folder;
+use TYPO3\CMS\Core\Exception;
 
 class biaoqian {
 
@@ -18,25 +19,33 @@ class biaoqian {
         if(strpos($url,'index.html')){
             $address = $cachepath.$before;
         }
-        if(file_exists($cachepath.$url)){
-            //有缓存文件直接调用
-            $folder = new Folder();
-            if (self::不是标签($address)==false){
-                $folder->open( $address); //打开 folder
-                $keydata = $folder->getSubFiles();
-                if (strpos($url,'index.html')!==false){
+        if(strcmp($url,'/')==0){
+            if(file_exists($cachepath.'/index/index.html')){
+                include $cachepath.'/index/index.html';
+            }
 
-                    include $cachepath.$url;
-                }else{
 
-                    include $cachepath.$url.'/'.$before.'.html';
-                }
+        }else{
+            if(file_exists($cachepath.$url)){
+                //有缓存文件直接调用
+                $folder = new Folder();
+                if (self::不是标签($address)==false){
+                    $folder->open( $address); //打开 folder
+                    $keydata = $folder->getSubFiles();
+                    if (strpos($url,'index.html')!==false){
 
-                //获取当前时间戳
-                exit;
+                        include $cachepath.$url;
+                    }else{
+
+                        include $cachepath.$url.'/'.$before.'.html';
+
+                    }
+
+                    //获取当前时间戳
+                    exit;
+                    }
             }
         }
-
         ob_start(); //开启缓存
     }
 
