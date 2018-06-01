@@ -13,16 +13,38 @@ class biaoqian {
         if ($before !='' && !file_exists($cachepath.$before)){
             mkdir($cachepath.$before);
         }
+
         if(file_exists($cachepath.$url)){
             //有缓存文件直接调用
             $folder = new Folder();
-            $folder->open( $cachepath.$before); //打开 folder
-            $keydata = $folder->getSubFiles();
-            include $cachepath.$url.'/12.html';
-            //获取当前时间戳
-            exit;
+            if (self::不是标签($cachepath.$url)==false){
+                $folder->open( $cachepath.$url); //打开 folder
+                $keydata = $folder->getSubFiles();
+                include $cachepath.$url.'/'.$before.'.html';
+                //获取当前时间戳
+                exit;
+            }
         }
+
         ob_start(); //开启缓存
+    }
+
+    static function 不是标签($path){//判断文件夹是否为空
+        $i=0;
+        if($handle=@opendir($path)) {
+            while(false!==($file=readdir($handle))){//读取文件夹里的文件
+                if($file!="."&&$file!="..") {
+                    $file_array[$i]["filename"]=$file;
+                    $i++;
+                }
+            }
+            closedir($handle);//关闭文件夹
+        }
+        if($i==0){
+            return true;//空
+        }else{
+            return false;//no空
+        }
     }
 
     static function 生成缓存($url){
@@ -31,7 +53,7 @@ class biaoqian {
         $cachepath = $path.'/public/cache/';
         $content = ob_get_contents();
         //写入到缓存内容到指定的文件夹
-        $fp = fopen($cachepath.$url,'w');
+        $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
         fwrite($fp,$content);
         fclose($fp);
         ob_flush(); //从PHP内存中释放出来缓存（取出数据）
