@@ -1,6 +1,7 @@
 <?php
 namespace script;
 
+use function GuzzleHttp\Psr7\str;
 use Tmkook\Folder;
 
 class biaoqian {
@@ -13,14 +14,24 @@ class biaoqian {
         if ($before !='' && !file_exists($cachepath.$before)){
             mkdir($cachepath.$before);
         }
-
+        $address = $cachepath.$url;
+        if(strpos($url,'index.html')){
+            $address = $cachepath.$before;
+        }
         if(file_exists($cachepath.$url)){
             //有缓存文件直接调用
             $folder = new Folder();
-            if (self::不是标签($cachepath.$url)==false){
-                $folder->open( $cachepath.$url); //打开 folder
+            if (self::不是标签($address)==false){
+                $folder->open( $address); //打开 folder
                 $keydata = $folder->getSubFiles();
-                include $cachepath.$url.'/'.$before.'.html';
+                if (strpos($url,'index.html')!==false){
+
+                    include $cachepath.$url;
+                }else{
+
+                    include $cachepath.$url.'/'.$before.'.html';
+                }
+
                 //获取当前时间戳
                 exit;
             }
@@ -31,15 +42,23 @@ class biaoqian {
 
     static function 不是标签($path){//判断文件夹是否为空
         $i=0;
+
         if($handle=@opendir($path)) {
             while(false!==($file=readdir($handle))){//读取文件夹里的文件
+
                 if($file!="."&&$file!="..") {
+
                     $file_array[$i]["filename"]=$file;
                     $i++;
+
                 }
             }
             closedir($handle);//关闭文件夹
+
         }
+
+
+
         if($i==0){
             return true;//空
         }else{
@@ -53,13 +72,22 @@ class biaoqian {
         $cachepath = $path.'/public/cache/';
         $content = ob_get_contents();
         //写入到缓存内容到指定的文件夹
-        $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
+
+        if(strpos($url,'index.html')!==false){
+
+            $fp = fopen($cachepath.$url,'w');
+        }else{
+            $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
+        }
+
         fwrite($fp,$content);
         fclose($fp);
         ob_flush(); //从PHP内存中释放出来缓存（取出数据）
         flush(); //把释放的数据发送到浏览器显示
         ob_end_clean(); //清空缓冲区的内容并关闭这个缓冲区
     }
+
+
 
     static function  keyword()
     {

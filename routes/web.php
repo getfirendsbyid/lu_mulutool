@@ -14,6 +14,6 @@
 
 $router->get('/', 'MuluController@index');
 $router->get('/{one}', 'MuluController@index');
-//$router->get('/{one}/{two}', 'MuluController@index');
+$router->get('/{one}/{two}', 'MuluController@index');
 
 
