@@ -49,6 +49,9 @@ class biaoqian {
                 if($file!="."&&$file!="..") {
 
                     $file_array[$i]["filename"]=$file;
+                    if ($file=='index.html'){
+                        $i--;
+                    }
                     $i++;
 
                 }
