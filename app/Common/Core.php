@@ -107,7 +107,7 @@ class biaoqian {
     }
 
     static function random_url(){
-       return  self::com('data/url');
+        return  self::com('data/url');
     }
 
     static function 图片地址($muluurl){
@@ -115,7 +115,7 @@ class biaoqian {
     }
 
     static function 时间(){    //年-月-日
-      return  date('Y-m-d');
+        return  date('Y-m-d');
     }
 
     static function deletespace($url)
@@ -171,7 +171,7 @@ class biaoqian {
     }
 
     static function 重复标题(){      //重复上一次正常标题的内容
-       return self::fixed('data/cfbt');
+        return self::fixed('data/cfbt');
     }
 
     static function 内容标题(){      //将从采集到的文章文档中，截取到内容的标题
@@ -282,14 +282,14 @@ class biaoqian {
     }
 
 
-/**
- * @param $name   指定名字查询蜘蛛数量 Baidu=百度蜘蛛
- *                                  Sogou=搜狗蜘蛛
- *                                  360Spider=360蜘蛛
- *                                  神马=神马蜘蛛
- *                若只想查看蜘蛛的总数量，随意传入参数即可，但是必须要有参数
- * @return array  0为指定蜘蛛的总数量,1为当前小时指定蜘蛛的总数量，2为所有蜘蛛总数量，3为当前小时所有蜘蛛总数量
- */
+    /**
+     * @param $name   指定名字查询蜘蛛数量 Baidu=百度蜘蛛
+     *                                  Sogou=搜狗蜘蛛
+     *                                  360Spider=360蜘蛛
+     *                                  神马=神马蜘蛛
+     *                若只想查看蜘蛛的总数量，随意传入参数即可，但是必须要有参数
+     * @return array  0为指定蜘蛛的总数量,1为当前小时指定蜘蛛的总数量，2为所有蜘蛛总数量，3为当前小时所有蜘蛛总数量
+     */
     static function spider($name){
         $file = @fopen(date('Y-m-d').'.txt','a+');//读取当天蜘蛛文件，若文件不存在则会自动创建一个
         $num = array(0,0,0,0);
