@@ -424,7 +424,6 @@ table th, table td {
 }
 
 .footer{
-	top: 880px;
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
@@ -435,35 +434,9 @@ table th, table td {
 	/*padding-left: 10px;*/
 }
 .footer .copyright{
-	margin-left: -280px;
+	margin-left: 10px;
 }
-.footer>ul{
-	z-index: 99;
-	position: absolute;
-	top:-150px;
-	animation: gundong 16s infinite;
-}
-.footer>ul>li{
-	height: 38px;
-	margin-left: 500px;
-}
-.footer>ul>li{
 
-}
-.footer>ul>li>a{
-	color: white;
-}
-@keyframes gundong{
-	0% {
-		top:-120px;
-	}
-	50% {
-		top: 0;
-	}
-	100%{
-		top:-120px
-	}
-}
 
 @media screen and (max-width: 768px){
 	.fast-add{
@@ -493,5 +466,4 @@ table th, table td {
 		margin: 10px;
 	}
 }
-
 

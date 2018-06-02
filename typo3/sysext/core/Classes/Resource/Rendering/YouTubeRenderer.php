@@ -88,7 +88,25 @@ class YouTubeRenderer implements FileRendererInterface
      * @param bool $usedPathsRelativeToCurrentScript See $file->getPublicUrl()
      * @return string
      */
-    public function render(FileInterface $file, $width, $height, array $options = null, $usedPathsRelativeToCurrentScript = false)
+    public function render(FileInterface $file, $width, $height, array $options = [], $usedPathsRelativeToCurrentScript = false)
+    {
+        $options = $this->collectOptions($options, $file);
+        $src = $this->createYouTubeUrl($options, $file);
+        $attributes = $this->collectIframeAttributes($width, $height, $options);
+
+        return sprintf(
+            '<iframe src="%s"%s></iframe>',
+            $src,
+            empty($attributes) ? '' : ' ' . implode(' ', $attributes)
+        );
+    }
+
+    /**
+     * @param array $options
+     * @param FileInterface $file
+     * @return array
+     */
+    protected function collectOptions(array $options, FileInterface $file)
     {
         // Check for an autoplay option at the file reference itself, if not overridden yet.
         if (!isset($options['autoplay']) && $file instanceof FileReference) {
@@ -98,21 +116,34 @@ class YouTubeRenderer implements FileRendererInterface
             }
         }
 
-        if ($file instanceof FileReference) {
-            $orgFile = $file->getOriginalFile();
-        } else {
-            $orgFile = $file;
-        }
+        $options['controls'] = $options['controls'] ?? 2;
+        $options['controls'] = MathUtility::canBeInterpretedAsInteger($options['controls']) ? MathUtility::forceIntegerInRange($options['controls'], 0, 2) : 2;
 
-        $videoId = $this->getOnlineMediaHelper($file)->getOnlineMediaId($orgFile);
+        if (!isset($options['allow'])) {
+            $options['allow'] = 'fullscreen';
+            if (!empty($options['autoplay'])) {
+                $options['allow'] = 'autoplay; fullscreen';
+            }
+        }
+        return $options;
+    }
+
+    /**
+     * @param array $options
+     * @param FileInterface $file
+     * @return string
+     */
+    protected function createYouTubeUrl(array $options, FileInterface $file)
+    {
+        $videoId = $this->getVideoIdFromFile($file);
 
         $urlParams = ['autohide=1'];
-
-        $options['controls'] = MathUtility::canBeInterpretedAsInteger($options['controls']) ? (int)$options['controls'] : 2;
-        $options['controls'] = MathUtility::forceIntegerInRange($options['controls'], 0, 2);
         $urlParams[] = 'controls=' . $options['controls'];
         if (!empty($options['autoplay'])) {
             $urlParams[] = 'autoplay=1';
+        }
+        if (!empty($options['modestbranding'])) {
+            $urlParams[] = 'modestbranding=1';
         }
         if (!empty($options['loop'])) {
             $urlParams[] = 'loop=1&amp;playlist=' . $videoId;
@@ -125,14 +156,41 @@ class YouTubeRenderer implements FileRendererInterface
         }
         $urlParams[] = 'showinfo=' . (int)!empty($options['showinfo']);
 
-        $src = sprintf(
+        $youTubeUrl = sprintf(
             'https://www.youtube%s.com/embed/%s?%s',
             !isset($options['no-cookie']) || !empty($options['no-cookie']) ? '-nocookie' : '',
             $videoId,
             implode('&amp;', $urlParams)
         );
 
+        return $youTubeUrl;
+    }
+
+    /**
+     * @param FileInterface $file
+     * @return string
+     */
+    protected function getVideoIdFromFile(FileInterface $file)
+    {
+        if ($file instanceof FileReference) {
+            $orgFile = $file->getOriginalFile();
+        } else {
+            $orgFile = $file;
+        }
+
+        return $this->getOnlineMediaHelper($file)->getOnlineMediaId($orgFile);
+    }
+
+    /**
+     * @param int|string $width
+     * @param int|string $height
+     * @param array $options
+     * @return array
+     */
+    protected function collectIframeAttributes($width, $height, array $options)
+    {
         $attributes = ['allowfullscreen'];
+
         if ((int)$width > 0) {
             $attributes[] = 'width="' . (int)$width . '"';
         }
@@ -142,16 +200,12 @@ class YouTubeRenderer implements FileRendererInterface
         if (is_object($GLOBALS['TSFE']) && $GLOBALS['TSFE']->config['config']['doctype'] !== 'html5') {
             $attributes[] = 'frameborder="0"';
         }
-        foreach (['class', 'dir', 'id', 'lang', 'style', 'title', 'accesskey', 'tabindex', 'onclick', 'poster', 'preload'] as $key) {
+        foreach (['class', 'dir', 'id', 'lang', 'style', 'title', 'accesskey', 'tabindex', 'onclick', 'poster', 'preload', 'allow'] as $key) {
             if (!empty($options[$key])) {
                 $attributes[] = $key . '="' . htmlspecialchars($options[$key]) . '"';
             }
         }
 
-        return sprintf(
-            '<iframe src="%s"%s></iframe>',
-            $src,
-            empty($attributes) ? '' : ' ' . implode(' ', $attributes)
-        );
+        return $attributes;
     }
 }
