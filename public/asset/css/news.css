@@ -1,0 +1,170 @@
+/*通用CSS*/
+*{margin:0;padding:0;}
+#wrap {width:960px;position:absolute;left:50%;margin:0 0 0 -480px;}
+ul,ol{list-style:none;}
+
+form {  
+    border: 0px dotted #AAAAAA;  
+    padding: 0px 6px 3px 6px;  
+    margin:0px;  
+    font:14px Arial;  
+}  
+input {  
+    color: #00008B;  
+    background-color: #ADD8E6; 
+    border: 1px solid #00008B;margin-top:6px;height:20px
+}  
+select {  
+    width: 80px;  
+    color: #00008B;  
+    background-color: #ADD8E6;  
+    border: 1px solid #00008B;  
+}  
+textarea {  
+    width: 500px;  
+    height: 100px;  
+    color: #00008B; margin-top:8px; 
+    background-color: #ADD8E6;  
+    border: 1px solid #00008B;  
+} 
+
+
+/*重庆等比例缩放样式*/
+
+
+/* for Firefox & IE7 */
+.PreviewImage0 { 
+    max-width: 240px; 
+    max-height: 150px; 
+} 
+
+/* for IE6 */
+* html .PreviewImage0 { 
+    width: expression(this.width > 240 && this.width > this.height ? 240 : auto); 
+    height: expresion(this.height >150 ? 150 : auto); 
+} 
+
+
+/* for Firefox & IE7 */
+.PreviewImage1 { 
+    max-width: 155px; 
+    max-height: 130px; 
+} 
+
+/* for IE6 */
+* html .PreviewImage1 { 
+    width: expression(this.width > 155 && this.width > this.height ? 155 : auto); 
+    height: expresion(this.height >130 ? 130 : auto); 
+} 
+
+
+/* for Firefox & IE7 */
+.PreviewImage2 { 
+    max-width: 170px; 
+    max-height: 150px; 
+} 
+
+/* for IE6 */
+* html .PreviewImage2 { 
+    width: expression(this.width > 170 && this.width > this.height ? 170 : auto); 
+    height: expresion(this.height >150 ? 150 : auto); 
+} 
+
+/*<img src="/images/logo.gif"  border="0"  class="PreviewImage"/>*/
+
+
+
+a{color:#333; text-decoration:none;}
+a:hover{ text-decoration:underline;}
+a:visited{ color:#666;}
+
+/* news view css-新闻阅读页样式 */
+
+.daohang{ clear:both;width:958px;height:50px;font-size:16px;color:#1974C8;font-weight:bold;border:1px solid #AFDEF4;background:#EEF6FE;}
+.daohang a{ color:#1974C8;}
+.daohang_left{width:200px;height:50px;line-height:50px;float:left;}
+.daohang_right{width:755px;height:50px;line-height:50px;float:right;text-align:right;}
+
+h3{ background:#EEF6FE url(../images/title_bg.png) repeat-x; font-size:14px;color:#1974C8;font-weight:bold; height:30px; line-height:30px; padding-left:14px; text-align:left;  }
+h3 span{padding:0 10px; font-size:12px; font-weight:normal;}
+h3 span{ color:#000; margin:0 10px;}
+h3 span a{ color:#1974C8;}
+
+h4{ background:#EEF6FE; margin-top:1px; color:#1974C8; font-weight:bold; height:30px; line-height:30px; padding-left:14px; text-align:left; font-size:14px; border-top:1px solid #AEDEF2;}
+h4 a{color:#1974C8;font-weight:bold;font-size:14px;}
+h4 span{padding:0 10px; font-size:14px; font-weight:normal;}
+h4 span{color:#000; margin:0 10px;}
+h4 span a{color:#1974C8;font-weight:normal;}
+
+
+.fl{float:left;}
+.fr{ float:right;}
+
+.view{width:960px;border:none;margin-top:10px;}
+.view_left{width:685px;background:#F7FCFF;border:1px solid #AFDEF4;margin-right:3px;float:left;text-align:center;display:inline;}
+.view_right{width:262px;border:1px solid #AFDEF4;float:right;text-align:center;display:inline;}
+.view_right p{margin-top:6px;font-size:14px;}
+.view_pnews{width:94%;border:none;text-align:center;margin:4px 4px 5px;}
+
+.pnews_imgborder{border:1px solid #666;width:240px;height:150px;text-align:center;}
+.img_border{border:1px solid #666;width:155px;height:130px;text-align:center;}
+
+.view_pnews img{margin-bottom:2px;}
+.view_pnews a,.view_class a{font-size:14px;}
+.view_title{width:95%;color:#ff6600;font-size:24px;font-weight:bold;margin:20 0 20px 0;padding-top:20px;}
+.view_title p{font-size:12px;color:#333333;font-weight:normal;}
+.view_content{width:95%;text-align:left;font-size:16px;margin:9px;line-height:200%;}
+.view_content img {max-width:650px;max-height:900px;border:0;}  Firefox & IE7 /*下如果不能在IMG标签上加样式调用就用这种方式控制*/
+.view_class{width:95%;text-align:left;margin-bottom:20px;}
+
+.mama{width:958px;align:center;border:1px solid #AFDEF4;margin-top:4px;margin-bottom:4px;}
+
+/*新闻中心CSS*/
+.c_content{ clear:both;width:960px;border:0;margin-top:6px;}
+.c_left,.c_middle,.c_right{border:1px solid #AFDEF4;margin-top:3px;display:inline;margin-botton:3px;}
+.c_left,.t_news_left{width:225px;margin-right:8px;float:left;border:0;}
+.c_middle{width:490px;margin-right:8px;float:left;}
+.c_middle1{width:490px;height:230px;}
+.c_middle2{width:490px;}
+.c_middle_one{width:96%;}
+.c_middle_one li{text-align:left;margin:4px 0 5px 7px;}
+.c_middle_one li a{font-size:16px;}
+
+.c_right{width:225px;float:right;background:#F7FCFF;}
+.c_left_1,.c_left_2,.c_left_3,.c_left_4,.c_left_5{background:#F7FCFF;border:1px solid #AFDEF4;margin-top:3px;margin-bottom:3px;}
+.c_left_1 li,.c_left_2 li,.c_left_3 li,.c_left_4 li,.c_left_5 li{margin:3px 3px 4px 8px;}
+.c_left_1{margin-top:0;}
+.right_search{height:40px;text-align:center;line-height:40px;margin-top:15px;}
+.right_sp{text-align:left;}
+.right_list{text-align:left;}
+.right_tp{text-align:center;}
+.view_pnews1{width:170px;border:0;text-align:center;display:inline;float:left;margin-left:15px;margin-top:5px;}
+.view_pnews1_img_border{border:1px solid #666;width:170px;height:150px;}
+.view_pnews1 p{margin:4px 0 4px 0;}
+.top_news{margin:5px 0 0 8px;text-align:left;font-size:12px;}
+.pic_news{ clear:both;text-align:left;margin:3px 0 3px 0;width:958px;height:220px;border:1px solid #AFDEF4;}
+
+
+/*图片新闻 CSS*/
+.t_news{ clear:both;width:960px;border:0;margin:5px 0 5px 0;}
+.t_news_right{width:722px;border:1px solid #AFDEF4;float:left;}
+.t_news_left{width:230px;margin-right:6px;}
+.t_news_left,.t_news_right{display:inline;}
+.t_news_right li{width:155px;margin:5px 0 5px 15px;float:left;}
+
+.t_news_right li p{margin:4px 0 4px 0;}
+.t_news_right dd{width:98%;text-align:center;}
+
+
+#poto{ width:685px; height:272px; text-align:left;}
+
+.commbox{border:none;}	
+.poto_list{ width:685px; overflow:hidden; padding-top:5px;}
+			.poto_list ul{ width:700px;}
+			.poto_list li{ float:left; height:112px; padding:5px 6px 5px 7px;}
+			.poto_list li img{ width:120px; height:90px; border:1px solid #000;}
+			.poto_list li p{ text-align:center; line-height:normal;width:100px;white-space:nowrap;overflow:hidden;}
+			* html .poto_list li p{ line-height:160%;}
+			*+html .poto_list li p{ line-height:160%;}
+
+

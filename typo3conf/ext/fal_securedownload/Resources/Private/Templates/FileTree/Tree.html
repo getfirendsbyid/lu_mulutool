@@ -1,0 +1,19 @@
+{namespace sd=BeechIt\FalSecuredownload\ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="main">
+
+	<f:if condition="{folder}">
+		<f:then>
+			<h3>{folder.name}</h3>
+			<sd:security.assetAccess folder="{folder}">
+				<f:render partial="FileTree/Leaf" arguments="{folder:folder}" />
+			</sd:security.assetAccess>
+		</f:then>
+
+		<f:else>
+			<f:translate key="noFolderSelected">No folder selected</f:translate>
+		</f:else>
+	</f:if>
+
+</f:section>
