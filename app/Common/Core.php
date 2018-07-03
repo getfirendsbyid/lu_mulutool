@@ -1,25 +1,24 @@
 <?php
+namespace script;
 
+use Tmkook\Folder;
 
-    function publicPath(){
-        $path = base_path();
-        $cachepath = $path.'/public/cache/';
-        $folder = new Tmkook\Folder;
-        $a = $folder->open($path); //打开 folder
-        $b = $folder->getFolders();
-        dd($b);
-    }
+class biaoqian {
 
     function 开启缓存($url){
         $path = base_path();
         $cachepath = $path.'/public/cache/';
         $before = str_before($url,'/');
+        $after = str_after($url,'/');
         if ($before !='' && !file_exists($cachepath.$before)){
             mkdir($cachepath.$before);
         }
-        if(file_exists($cachepath.$url.'.html')){
+        if(file_exists($cachepath.$url)){
             //有缓存文件直接调用
-            include $cachepath.$url.'.html';
+            $folder = new Folder();
+            $folder->open( $cachepath.$before); //打开 folder
+            $keydata = $folder->getSubFiles();
+            include $cachepath.$url.'/12.html';
             //获取当前时间戳
             exit;
         }
@@ -29,11 +28,10 @@
     function 生成缓存($url){
         //在文件代码末尾获取上面生成的缓存内容
         $path = base_path();
-        $handler = opendir($path.'/public/cache/');
         $cachepath = $path.'/public/cache/';
         $content = ob_get_contents();
         //写入到缓存内容到指定的文件夹
-        $fp = fopen($cachepath.$url.'.html','w');
+        $fp = fopen($cachepath.$url,'w');
         fwrite($fp,$content);
         fclose($fp);
         ob_flush(); //从PHP内存中释放出来缓存（取出数据）
@@ -41,7 +39,7 @@
         ob_end_clean(); //清空缓冲区的内容并关闭这个缓冲区
     }
 
-    function keyword()
+    static function  keyword()
     {
         return com('data/key');
     }
@@ -183,7 +181,9 @@
     }
 
     function con($path){
-        $keydata = \Illuminate\Support\Facades\Storage::allFiles($path);
+        $folder = new Tmkook\Folder;
+        $folder->open( base_path().$path); //打开 folder
+        $keydata = $folder->getFolders();
         $body = '没有找到对应内容';
         for ($i = 0;$i <count($keydata);$i++) {
 //            dd(count($keydata));
@@ -254,9 +254,6 @@
         fclose($file);//关闭文件
         return $num;
     }
-
-
-
-
+}
 
 

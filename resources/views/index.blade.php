@@ -1,10 +1,10 @@
-<?php 开启缓存($url) ?>
+<?php //开启缓存($url) ?>
 
 
-<?php echo publicPath(); ?>
+<?php echo  date('Ymdhis'); ?>
 
 
-<?php 生成缓存($url) ?>
+<?php //生成缓存($url) ?>
 
 
 
