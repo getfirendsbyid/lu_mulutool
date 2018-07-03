@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Url;
 
 class MuluController extends Controller
 {
@@ -20,6 +19,11 @@ class MuluController extends Controller
     {
        $url = \Illuminate\Support\Facades\Input::path();
        return view('index',compact('url'));
+    }
+
+    public function createfile()
+    {
+        
     }
 
 
