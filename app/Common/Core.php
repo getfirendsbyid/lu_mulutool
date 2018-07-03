@@ -5,7 +5,7 @@ use Tmkook\Folder;
 
 class biaoqian {
 
-    function 开启缓存($url){
+    static function 开启缓存($url){
         $path = base_path();
         $cachepath = $path.'/public/cache/';
         $before = str_before($url,'/');
@@ -25,7 +25,7 @@ class biaoqian {
         ob_start(); //开启缓存
     }
 
-    function 生成缓存($url){
+    static function 生成缓存($url){
         //在文件代码末尾获取上面生成的缓存内容
         $path = base_path();
         $cachepath = $path.'/public/cache/';
@@ -41,72 +41,72 @@ class biaoqian {
 
     static function  keyword()
     {
-        return com('data/key');
+        return self::com('data/key');
     }
 
-    function title(){
-        return com('data/bt');
+    static function title(){
+        return self::com('data/bt');
     }
 
-    function body(){
-        return com('data/txt');
+    static function body(){
+        return self::com('data/txt');
     }
 
-    function diy(){
-        return com('data/zdy');
+    static function diy(){
+        return self::com('data/zdy');
     }
 
-    function random_url(){
-       return  com('data/url');
+    static function random_url(){
+       return  self::com('data/url');
     }
 
-    function 图片地址($muluurl){
-        return $muluurl.'/'.com('data/imgurl');  //图片地址
+    static function 图片地址($muluurl){
+        return $muluurl.'/'.self::com('data/imgurl');  //图片地址
     }
 
-    function 时间(){    //年-月-日
+    static function 时间(){    //年-月-日
       return  date('Y-m-d');
     }
 
-    function deletespace($url)
+    static function deletespace($url)
     {
 
         return str_replace(array("\r\n", "\r", "\n" ,"\t"), "", $url);
     }
 
-    function 随机数字($num){    //随机拿取100到传入最大数
+    static function 随机数字($num){    //随机拿取100到传入最大数
         return rand(100,$num);
     }
 
-    function 文章标题(){
-        return com('data/head');
+    static function 文章标题(){
+        return self::com('data/head');
     }
 
-    function 固定标题(){       //固定标题调用的句子将与当前页面的title相同，使用此标签前提要使用过title标签
-        return fixed('data/fixed');
+    static function 固定标题(){       //固定标题调用的句子将与当前页面的title相同，使用此标签前提要使用过title标签
+        return self::fixed('data/fixed');
     }
 
-    function 正常标题(){       //非菠菜标题
-        return com('data/zcbt');
+    static function 正常标题(){       //非菠菜标题
+        return self::com('data/zcbt');
     }
 
-    function des(){      //description
-        return com('data/des');
+    static function des(){      //description
+        return self::com('data/des');
     }
 
-    function 固定key(){      //与当前页面的KEY相同，使用此标签前提要使用过keyword标签
-        return fixed('data/gdkey');
+    static function 固定key(){      //与当前页面的KEY相同，使用此标签前提要使用过keyword标签
+        return self::fixed('data/gdkey');
     }
 
-    function 网站名称(){
-        return com('data/name');
+    static function 网站名称(){
+        return self::com('data/name');
     }
 
-    function 当前时间(){     //年-月-日 小时:分:秒
+    static function 当前时间(){     //年-月-日 小时:分:秒
         return date('Y-m-d H:i:s');
     }
 
-    function 随机时间(){        //获取三天内的随机时间,年-月-日 小时:分:秒
+    static function 随机时间(){        //获取三天内的随机时间,年-月-日 小时:分:秒
         $begintime = date('Y-m-d H:i:s' , strtotime("-3 day"));
         $begin = strtotime($begintime);
         $end = strtotime(date('Y-m-d H:i:s'));
@@ -115,32 +115,38 @@ class biaoqian {
 
     }
 
-    function 过去时间($time){     //传入的参数：整数，代表想获取多少天前的时间,年-月-日 小时:分:秒
+    static function 过去时间($time){     //传入的参数：整数，代表想获取多少天前的时间,年-月-日 小时:分:秒
         return date('Y-m-d H:i:s' , strtotime("-".$time." day"));
 
     }
 
-    function 重复标题(){      //重复上一次正常标题的内容
-       return fixed('data/cfbt');
+    static function 重复标题(){      //重复上一次正常标题的内容
+       return self::fixed('data/cfbt');
     }
 
-    function 内容标题(){      //将从采集到的文章文档中，截取到内容的标题
-        return bt('data/txt');
+    static function 内容标题(){      //将从采集到的文章文档中，截取到内容的标题
+        return self::bt('data/txt');
     }
 
-    function 相对内容(){        //将从采集到的文章文档中，截取到内容(次内容将会和内容标题对应，所以要用此标签前必须使用内容标题)
-        return con('data/txt');
+    static function 相对内容(){        //将从采集到的文章文档中，截取到内容(次内容将会和内容标题对应，所以要用此标签前必须使用内容标题)
+        return self::con('data/txt');
     }
 
 
 
-    function com($path){
-        $keydata = \Illuminate\Support\Facades\Storage::allFiles($path);
+    static function com($path){
+
+        $folder = new Folder();
+        $folder->open( base_path().'/public/'.$path); //打开 folder
+        $keydata = $folder->getFiles();
         $whitchfile = $keydata[rand(0,count($keydata)-1)];
+
         $keyfile = file($whitchfile);
+
         foreach ($keyfile as $key=>$item){
             $keyword[$key] = $item;
         }
+
         $count = count($keyword);
         $num = rand(0,$count-1);
         if(strcmp($path,'data/bt')==0){
@@ -157,12 +163,13 @@ class biaoqian {
             fclose($gdkey);
         }
 
-        return deletespace($keyword[$num]);
+        return self::deletespace($keyword[$num]);
     }
 
-    function bt($path){
-        $keydata = \Illuminate\Support\Facades\Storage::allFiles($path);
-
+    static function bt($path){
+        $folder = new Folder();
+        $folder->open( base_path().'/public/'.$path); //打开 folder
+        $keydata = $folder->getFiles();
         $whichfile = $keydata[rand(0,count($keydata)-1)];
         $keyfile= file($whichfile);
         foreach ($keyfile as $key=>$item){
@@ -180,10 +187,10 @@ class biaoqian {
         return $bt;
     }
 
-    function con($path){
-        $folder = new Tmkook\Folder;
-        $folder->open( base_path().$path); //打开 folder
-        $keydata = $folder->getFolders();
+    static function con($path){
+        $folder = new Folder();
+        $folder->open( base_path().'/public/'.$path); //打开 folder
+        $keydata = $folder->getFiles();
         $body = '没有找到对应内容';
         for ($i = 0;$i <count($keydata);$i++) {
 //            dd(count($keydata));
@@ -193,7 +200,8 @@ class biaoqian {
             foreach ($keyfile as $key => $item) {
                 $keyword[$key] = $item;
             }
-            $btbf = \Illuminate\Support\Facades\Storage::allFiles('data/btbf');
+            $folder->open( base_path().'/public/'.'data/btbf'); //打开 folder
+            $btbf = $folder->getFolders();
             $whitchfile = $btbf[0];
             $keyfile = file($whitchfile);
 //            $body = $keyword;
@@ -213,12 +221,14 @@ class biaoqian {
         return $neirong;
     }
 
-    function fixed($path){
-        $keydata = \Illuminate\Support\Facades\Storage::allFiles($path);
+    static function fixed($path){
+        $folder = new Folder();
+        $folder->open( base_path().'/public/'.$path); //打开 folder
+        $keydata = $folder->getFiles();
         $whitchfile = $keydata[0];
         $keyfile = file($whitchfile);
 
-        return deletespace($keyfile[0]);
+        return self::deletespace($keyfile[0]);
     }
 
 
@@ -230,7 +240,7 @@ class biaoqian {
  *                若只想查看蜘蛛的总数量，随意传入参数即可，但是必须要有参数
  * @return array  0为指定蜘蛛的总数量,1为当前小时指定蜘蛛的总数量，2为所有蜘蛛总数量，3为当前小时所有蜘蛛总数量
  */
-    function spider($name){
+    static function spider($name){
         $file = @fopen(date('Y-m-d').'.txt','a+');//读取当天蜘蛛文件，若文件不存在则会自动创建一个
         $num = array(0,0,0,0);
         while(!feof($file))
