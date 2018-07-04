@@ -18,7 +18,7 @@ class biaoqian {
             $folder = new Folder();
             $folder->open( $cachepath.$before); //打开 folder
             $keydata = $folder->getSubFiles();
-            include $cachepath.$url.'/12.html';
+            include $cachepath.$url.'';
             //获取当前时间戳
             exit;
         }
