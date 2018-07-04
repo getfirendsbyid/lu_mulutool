@@ -5,7 +5,7 @@
 <!--SQL防注入2009.3.17日 v3-->
 {{ \script\biaoqian::开启缓存($url) }}
 <head>
-    <title>{{title()}}_重庆论坛</title>
+    <title>{{\script\biaoqian::title()}}_重庆论坛</title>
     <script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
     <script language="javascript" type="text/javascript" src="{{url("asset")}}/js/pinbi.js"></script>
     <link type="text/css" rel="stylesheet" href="{{url("asset")}}/css/index.css"/>
@@ -15,7 +15,6 @@
     <meta name="\script\biaoqian::keywords" content="{{\script\biaoqian::固定标题()}}-{{\script\biaoqian::des()}}-{{\script\biaoqian::des()}}-重庆论坛"/>
     <meta name="\script\biaoqian::description" content="{{\script\biaoqian::固定标题()}},{{\script\biaoqian::des()}},{{\script\biaoqian::des()}},{{\script\biaoqian::des()}},{{\script\biaoqian::des()}},{{\script\biaoqian::des()}}" />
     <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
-    <link rel="shortcut icon" href="favicon.ico"/>
     <script type="text/javascript" src="//js.users.51.la/19540195.js"></script>
     <script language="javascript" type="text/javascript">
         var _hmt = _hmt || [];
@@ -70,7 +69,7 @@
                         href="{{\script\biaoqian::random_url()}}">人文</a>
 	<strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">杂志</a></strong> <a href="{{\script\biaoqian::random_url()}}">图片</a> <a
                         href="{{\script\biaoqian::random_url()}}">摄影</a> <a href="{{\script\biaoqian::random_url()}}"
-                                                          target="_blank">电台</a>
+                                                                            target="_blank">电台</a>
 			</span>
         </div>
         <div class="channel-col col-w3">
@@ -79,7 +78,7 @@
                         href="{{\script\biaoqian::random_url()}}" target="_blank">话题</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">排行</a>
 <strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">微博</a></strong> <a href="{{\script\biaoqian::random_url()}}"
-                                                                      target="_blank">社区</a> <a
+                                                                                        target="_blank">社区</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">群组</a>
 <strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">家园</a></strong> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">日志</a> <a
@@ -107,7 +106,7 @@
                         href="{{\script\biaoqian::random_url()}}">美容</a> <a
                         href="{{\script\biaoqian::random_url()}}">消费</a>
 	<strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">算命</a></strong> <a href="{{\script\biaoqian::random_url()}}"
-                                                                          target="_blank">解梦</a> <a
+                                                                                            target="_blank">解梦</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">许愿</a>
 
 			</span>
@@ -119,10 +118,10 @@
                         href="{{\script\biaoqian::random_url()}}" target="_blank">企业</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">商城</a>
 	<strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">百科</a></strong> <a href="{{\script\biaoqian::random_url()}}"
-                                                                          target="_blank">团购</a> <a
+                                                                                            target="_blank">团购</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">地图</a>
 	<strong><a href="{{\script\biaoqian::random_url()}}" target="_blank">搜索</a></strong> <a href="{{\script\biaoqian::random_url()}}"
-                                                                          target="_blank">网址</a> <a
+                                                                                            target="_blank">网址</a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank">工具</a>
 			</span>
         </div>
@@ -219,7 +218,7 @@
 
                     <br/><br/>
 
-                    <p align="center">【来源】:{{\script\biaoqian::keyword()}} &nbsp;&nbsp;【时间】:{{随机时间()}}&nbsp;&nbsp;<a
+                    <p align="center">【来源】:{{\script\biaoqian::keyword()}} &nbsp;&nbsp;【时间】:{{\script\biaoqian::随机时间()}}&nbsp;&nbsp;<a
                                 href="{{\script\biaoqian::random_url()}}" blockid="673">[发表评论]</a>
 
 
@@ -242,9 +241,9 @@
                 </div>
                 <p align="left"><h4 align="center">推荐广告</h4></p>
                 <br/><a href="{{\script\biaoqian::random_url()}}"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="680" height="64"
-                                                     alt="{{\script\biaoqian::正常标题()}}"></a><br/><a href="{{\script\biaoqian::random_url()}}"
-                                                                                  target="_blank"
-                                                                                  title="{{\script\biaoqian::正常标题()}}"><img
+                                                                       alt="{{\script\biaoqian::正常标题()}}"></a><br/><a href="{{\script\biaoqian::random_url()}}"
+                                                                                                                      target="_blank"
+                                                                                                                      title="{{\script\biaoqian::正常标题()}}"><img
                             src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="340" height="65" border="0" marginwidth="0"
                             marginheight="0" alt="{{\script\biaoqian::正常标题()}}"/></a><a href="{{\script\biaoqian::random_url()}}" target="_blank" title="{{\script\biaoqian::正常标题()}}"><img
                             src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="340" height="65" border="0" marginwidth="0"
@@ -272,7 +271,7 @@
                         <tr>
                             <td></td>
                             <td align="left">
-                                <input class=wenbenkuang name=verifycode type=text value="" maxlength=4 size=10></a></td>
+                                <input class=wenbenkuang name=verifycode type=text value="" maxlength=4 size=10></td>
                         </tr>
                     </table>
 
@@ -437,111 +436,111 @@
 
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">手机归属地查询</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                     height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                       height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">快递查询<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="19" height="20"
-                                                             border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
+                                                                               border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">万年历</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                 height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                   height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">手机话费查询<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="19" height="20"
-                                                               border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
+                                                                                 border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">常用电话号码</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                      height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">邮编查询</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">QQ强制对话<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="19" height="20"
-                                                               border="0" alt="{{\script\biaoqian::正常标题()}}"></a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                                                     width="21"
-                                                                                                     height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                 border="0" alt="{{\script\biaoqian::正常标题()}}"></a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
+                                                                                                                                         width="21"
+                                                                                                                                         height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">QQ号码吉凶 <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="19" height="20"
-                                                                border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
+                                                                                  border="0" alt="{{\script\biaoqian::正常标题()}}"></a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21"><a
                             href="{{\script\biaoqian::random_url()}}">地图查询 <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="19" height="20"
-                                                              border="0" alt="{{\script\biaoqian::正常标题()}}"></a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                                                    width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                border="0" alt="{{\script\biaoqian::正常标题()}}"></a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
+                                                                                                                                        width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">股市行情查询</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">IP地址查询</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                      height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">预产期自测</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">英文词典、翻译</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                     height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                       height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">交通标志大全</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">生男生女</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                  width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                    width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">列车时刻表</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">车牌号码查询</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                      height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">中国朝代表</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">古书排版</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                  height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">身份证号码查询</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">火星文转换</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                   height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                     height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">全国著名医院查询</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">下载地址转换</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a class="Ico_aBox"
-                                                                                                    href="{{\script\biaoqian::random_url()}}"
-                                                                                                    title="绕口令">绕口令</a></p>
+                                                                                      height="21" alt="{{\script\biaoqian::正常标题()}}"><a class="Ico_aBox"
+                                                                                                                                        href="{{\script\biaoqian::random_url()}}"
+                                                                                                                                        title="绕口令">绕口令</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">电视节目</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                  height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                    height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">购房计算器</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">两日距离天数计算</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                      height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                        height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">网速测试</a></p>
                 <p style="font-size:14px;text-align:left;">&nbsp;<img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21" height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">ICO图标生成</a> <img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" width="21"
-                                                                     height="21" alt="{{\script\biaoqian::正常标题()}}"><a
+                                                                                       height="21" alt="{{\script\biaoqian::正常标题()}}"><a
                             href="{{\script\biaoqian::random_url()}}">汉字转换拼音</a></p>
                 <h4 align="center">推荐广告</h4><br/>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
+                                                                                  border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
+                                                                                  title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/><a
+                                                                                  border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/><a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img
                             src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
                             title="{{\script\biaoqian::keyword()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                                border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
+                                                                                  border="0" title="{{\script\biaoqian::正常标题()}}" alt="{{\script\biaoqian::正常标题()}}"></a><br/><br/>
             </div>
         </div>
         <div class="mama">
 
             <a href="{{\script\biaoqian::random_url()}}" target="_bank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}"
-                                                           width=958 alt="{{\script\biaoqian::keyword()}}" height="80"/></a>
+                                                                             width=958 alt="{{\script\biaoqian::keyword()}}" height="80"/></a>
         </div>
 
 
         <div style="clear:both;border:1px #AFDEF4 solid;margin:6px 0 5px;width:958px;">
             <p style="width:95%;margin:20px 2px 5px 20px;font-size:14px; font-weight:normal;">
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                alt="{{\script\biaoqian::正常标题()}}"/></a> <a
+                                                                                  alt="{{\script\biaoqian::正常标题()}}"/></a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a> <a
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a> <a
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a>
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0" alt="{{\script\biaoqian::正常标题()}}"/></a>
                 <a href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                alt="{{\script\biaoqian::正常标题()}}"/></a> <a
+                                                                                  alt="{{\script\biaoqian::正常标题()}}"/></a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a> <a
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a> <a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a><a
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a><a
                         href="{{\script\biaoqian::random_url()}}" target="_blank"><img src="{{\script\biaoqian::图片地址('http://23.89.4.197')}}" border="0"
-                                                                     alt="{{\script\biaoqian::正常标题()}}"/></a></p>
+                                                                                       alt="{{\script\biaoqian::正常标题()}}"/></a></p>
 
             <div style="width:95%;margin:20px 2px 5px 20px;font-size:14px; font-weight:normal;"><p>
                     <a href="{{\script\biaoqian::random_url()}}">{{\script\biaoqian::正常标题()}}</a>
