@@ -1,6 +1,7 @@
 <?php
 namespace script;
 
+use function GuzzleHttp\Psr7\str;
 use Tmkook\Folder;
 
 class biaoqian {
@@ -13,14 +14,24 @@ class biaoqian {
         if ($before !='' && !file_exists($cachepath.$before)){
             mkdir($cachepath.$before);
         }
-
+        $address = $cachepath.$url;
+        if(strpos($url,'index.html')){
+            $address = $cachepath.$before;
+        }
         if(file_exists($cachepath.$url)){
             //有缓存文件直接调用
             $folder = new Folder();
-            if (self::不是标签($cachepath.$url)==false){
-                $folder->open( $cachepath.$url); //打开 folder
+            if (self::不是标签($address)==false){
+                $folder->open( $address); //打开 folder
                 $keydata = $folder->getSubFiles();
-                include $cachepath.$url.'/'.$before.'.html';
+                if (strpos($url,'index.html')!==false){
+
+                    include $cachepath.$url;
+                }else{
+
+                    include $cachepath.$url.'/'.$before.'.html';
+                }
+
                 //获取当前时间戳
                 exit;
             }
@@ -31,15 +42,26 @@ class biaoqian {
 
     static function 不是标签($path){//判断文件夹是否为空
         $i=0;
+
         if($handle=@opendir($path)) {
             while(false!==($file=readdir($handle))){//读取文件夹里的文件
+
                 if($file!="."&&$file!="..") {
+
                     $file_array[$i]["filename"]=$file;
+                    if ($file=='index.html'){
+                        $i--;
+                    }
                     $i++;
+
                 }
             }
             closedir($handle);//关闭文件夹
+
         }
+
+
+
         if($i==0){
             return true;//空
         }else{
@@ -53,13 +75,22 @@ class biaoqian {
         $cachepath = $path.'/public/cache/';
         $content = ob_get_contents();
         //写入到缓存内容到指定的文件夹
-        $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
+
+        if(strpos($url,'index.html')!==false){
+
+            $fp = fopen($cachepath.$url,'w');
+        }else{
+            $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
+        }
+
         fwrite($fp,$content);
         fclose($fp);
         ob_flush(); //从PHP内存中释放出来缓存（取出数据）
         flush(); //把释放的数据发送到浏览器显示
         ob_end_clean(); //清空缓冲区的内容并关闭这个缓冲区
     }
+
+
 
     static function  keyword()
     {
@@ -79,7 +110,7 @@ class biaoqian {
     }
 
     static function random_url(){
-       return  self::com('data/url');
+        return  self::com('data/url');
     }
 
     static function 图片地址($muluurl){
@@ -87,7 +118,7 @@ class biaoqian {
     }
 
     static function 时间(){    //年-月-日
-      return  date('Y-m-d');
+        return  date('Y-m-d');
     }
 
     static function deletespace($url)
@@ -143,7 +174,7 @@ class biaoqian {
     }
 
     static function 重复标题(){      //重复上一次正常标题的内容
-       return self::fixed('data/cfbt');
+        return self::fixed('data/cfbt');
     }
 
     static function 内容标题(){      //将从采集到的文章文档中，截取到内容的标题
@@ -254,14 +285,14 @@ class biaoqian {
     }
 
 
-/**
- * @param $name   指定名字查询蜘蛛数量 Baidu=百度蜘蛛
- *                                  Sogou=搜狗蜘蛛
- *                                  360Spider=360蜘蛛
- *                                  神马=神马蜘蛛
- *                若只想查看蜘蛛的总数量，随意传入参数即可，但是必须要有参数
- * @return array  0为指定蜘蛛的总数量,1为当前小时指定蜘蛛的总数量，2为所有蜘蛛总数量，3为当前小时所有蜘蛛总数量
- */
+    /**
+     * @param $name   指定名字查询蜘蛛数量 Baidu=百度蜘蛛
+     *                                  Sogou=搜狗蜘蛛
+     *                                  360Spider=360蜘蛛
+     *                                  神马=神马蜘蛛
+     *                若只想查看蜘蛛的总数量，随意传入参数即可，但是必须要有参数
+     * @return array  0为指定蜘蛛的总数量,1为当前小时指定蜘蛛的总数量，2为所有蜘蛛总数量，3为当前小时所有蜘蛛总数量
+     */
     static function spider($name){
         $file = @fopen(date('Y-m-d').'.txt','a+');//读取当天蜘蛛文件，若文件不存在则会自动创建一个
         $num = array(0,0,0,0);
