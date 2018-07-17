@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\Exception\InvalidTargetFolderException;
 use TYPO3\CMS\Core\Resource\Index\FileIndexRepository;
 use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperRegistry;
+use TYPO3\CMS\Core\Utility\Exception\NotImplementedMethodException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -1703,6 +1704,7 @@ class ResourceStorage implements ResourceStorageInterface
     {
         // Check if user is allowed to edit
         $this->assureFileWritePermissions($file);
+        $this->emitPreFileSetContentsSignal($file, $contents);
         // Call driver method to update the file and update file index entry afterwards
         $result = $this->driver->setFileContents($file->getIdentifier(), $contents);
         if ($file instanceof File) {
@@ -1727,6 +1729,7 @@ class ResourceStorage implements ResourceStorageInterface
     public function createFile($fileName, Folder $targetFolderObject)
     {
         $this->assureFileAddPermissions($targetFolderObject, $fileName);
+        $this->emitPreFileCreateSignal($fileName, $targetFolderObject);
         $newFileIdentifier = $this->driver->createFile($fileName, $targetFolderObject->getIdentifier());
         $this->emitPostFileCreateSignal($newFileIdentifier, $targetFolderObject);
         return $this->getResourceFactoryInstance()->getFileObjectByStorageAndIdentifier($this->getUid(), $newFileIdentifier);
@@ -1853,7 +1856,7 @@ class ResourceStorage implements ResourceStorageInterface
                 throw new Exception\ExistingTargetFileNameException('The target file already exists', 1329850997);
             }
         }
-        $this->emitPreFileMoveSignal($file, $targetFolder);
+        $this->emitPreFileMoveSignal($file, $targetFolder, $sanitizedTargetFileName);
         $sourceStorage = $file->getStorage();
         // Call driver method to move the file and update the index entry
         try {
@@ -2085,11 +2088,11 @@ class ResourceStorage implements ResourceStorageInterface
      * @param string $newFolderName
      *
      * @return bool
-     * @throws \RuntimeException
+     * @throws NotImplementedMethodException
      */
     protected function moveFolderBetweenStorages(Folder $folderToMove, Folder $targetParentFolder, $newFolderName)
     {
-        throw new \RuntimeException('Not yet implemented', 1476046361);
+        throw new NotImplementedMethodException('Not yet implemented', 1476046361);
     }
 
     /**
@@ -2142,11 +2145,11 @@ class ResourceStorage implements ResourceStorageInterface
      * @param string $newFolderName
      *
      * @return bool
-     * @throws \RuntimeException
+     * @throws NotImplementedMethodException
      */
     protected function copyFolderBetweenStorages(Folder $folderToCopy, Folder $targetParentFolder, $newFolderName)
     {
-        throw new \RuntimeException('Not yet implemented.', 1476046386);
+        throw new NotImplementedMethodException('Not yet implemented.', 1476046386);
     }
 
     /**
@@ -2526,10 +2529,11 @@ class ResourceStorage implements ResourceStorageInterface
      *
      * @param FileInterface $file
      * @param Folder $targetFolder
+     * @param string $targetFileName
      */
-    protected function emitPreFileMoveSignal(FileInterface $file, Folder $targetFolder)
+    protected function emitPreFileMoveSignal(FileInterface $file, Folder $targetFolder, string $targetFileName)
     {
-        $this->getSignalSlotDispatcher()->dispatch(self::class, self::SIGNAL_PreFileMove, [$file, $targetFolder]);
+        $this->getSignalSlotDispatcher()->dispatch(self::class, self::SIGNAL_PreFileMove, [$file, $targetFolder, $targetFileName]);
     }
 
     /**
@@ -2589,6 +2593,17 @@ class ResourceStorage implements ResourceStorageInterface
     }
 
     /**
+     * Emits the file pre-create signal
+     *
+     * @param string $fileName
+     * @param Folder $targetFolder
+     */
+    protected function emitPreFileCreateSignal(string $fileName, Folder $targetFolder)
+    {
+        $this->getSignalSlotDispatcher()->dispatch(self::class, self::SIGNAL_PreFileCreate, [$fileName, $targetFolder]);
+    }
+
+    /**
      * Emits the file post-create signal
      *
      * @param string $newFileIdentifier
@@ -2617,6 +2632,17 @@ class ResourceStorage implements ResourceStorageInterface
     protected function emitPostFileDeleteSignal(FileInterface $file)
     {
         $this->getSignalSlotDispatcher()->dispatch(self::class, self::SIGNAL_PostFileDelete, [$file]);
+    }
+
+    /**
+     * Emits the file pre-set-contents signal
+     *
+     * @param FileInterface $file
+     * @param mixed $content
+     */
+    protected function emitPreFileSetContentsSignal(FileInterface $file, $content)
+    {
+        $this->getSignalSlotDispatcher()->dispatch(self::class, self::SIGNAL_PreFileSetContents, [$file, $content]);
     }
 
     /**
