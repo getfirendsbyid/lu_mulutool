@@ -12,11 +12,14 @@
 */
 
 
-
+$router->get('/cha', 'AdminController@cha');
 
 $router->get('login', function (){
     return view('admin.login');
 });
+
+
+
 $router->post('admin/dologin', 'AdminController@dologin');
 $router->get('admin/home', 'AdminController@home');
 $router->get('admin/index', 'AdminController@index');
@@ -25,4 +28,6 @@ $router->get('findincluded', 'SpiderController@findincluded');
 $router->get('/', 'MuluController@index');
 $router->get('/{one}', 'MuluController@index');
 $router->get('/{one}/{two}', 'MuluController@index');
+
+
 

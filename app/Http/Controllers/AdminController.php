@@ -86,4 +86,15 @@ class AdminController extends Controller
         }
     }
 
+    public function cha()
+    {
+        $a =  file('url/url.txt');
+        $b = fopen("url/url1.txt", "w");
+        foreach ($a as $item){
+            fwrite($b, 'https://www.'.str_after($item,'https://'));
+
+        }
+        fclose($b);
+    }
+
 }
