@@ -5,7 +5,11 @@ use function GuzzleHttp\Psr7\str;
 use Tmkook\Folder;
 use TYPO3\CMS\Core\Exception;
 
+
+
 class biaoqian {
+
+
 
     static function 开启缓存($url){
 //        dd($url);
@@ -13,7 +17,6 @@ class biaoqian {
         $cachepath = $path.'/public/cache/';
         $num = strripos($url,'/');
 
-//        dd($before);
         $before = str_before($url,'/');
         if(substr_count($url,'/')>=1){
             $before = substr($url,0,$num);
@@ -31,10 +34,6 @@ class biaoqian {
             }else{
                 mkdir($cachepath.$before);
             }
-
-
-
-
         }
         $address = $cachepath.$url;
 //        dd(strpos($url,'.html')!==false);
