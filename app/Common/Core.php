@@ -3,113 +3,52 @@ namespace script;
 
 use function GuzzleHttp\Psr7\str;
 use Tmkook\Folder;
-use TYPO3\CMS\Core\Exception;
-
-
 
 class biaoqian {
 
-
-
-
     static function 开启缓存($url){
-//        dd($url);
         $path = base_path();
         $cachepath = $path.'/public/cache/';
-        $num = strripos($url,'/');
-        $filearr = explode('/',$url);
-
         $before = str_before($url,'/');
-        if(substr_count($url,'/')>=1){
-            $before = substr($url,0,$num);
-            if(strpos($url,'html')==false){
-                $url = $url.'.html';
-            }
-        }
         $after = str_after($url,'/');
         if ($before !='' && !file_exists($cachepath.$before)){
-            if(strpos($before,'.html')!==false){
-                $before = str_before($before,'.');
-                if (!file_exists($cachepath.$before)){
-                    mkdir($cachepath.$before);
-                }
-            }else{
-                mkdir($cachepath.$before);
-            }
+            mkdir($cachepath.$before);
         }
         $address = $cachepath.$url;
-//        dd(strpos($url,'.html')!==false);
-        if(strpos($url,'index.html')!==false){
-            $address = $cachepath.$before;
-        }elseif (strpos($url,'.html')!==false){
-            if (strpos($url,'/')==false){
-                $url = str_before($url,'.').'/'.$url;
-                $address = $cachepath.$before;
-            }else{
-                $address = $cachepath.$before;
-                //            dd($address);
-                if (strpos($address,'.html')!==false){
-                    $address = $cachepath.str_before($before,'.');
-                }
-            }
-        }else{
+        if(strpos($url,'index.html')){
             $address = $cachepath.$before;
         }
-        if(strcmp($url,'/')==0){
-            if(file_exists($cachepath.'/index/index.html')){
-                include $cachepath.'/index/index.html';
-            }
+        if(file_exists($cachepath.$url)){
+            //有缓存文件直接调用
+            $folder = new Folder();
+            if (self::不是标签($address)==false){
+                $folder->open( $address); //打开 folder
+                $keydata = $folder->getSubFiles();
+                if (strpos($url,'index.html')!==false){
 
-        }else{
-//            dd($cachepath.$url);
-//            if(file_exists($address)){
-//            dd($cachepath.$url);
+                    include $cachepath.$url;
+                }else{
 
-            if(file_exists($cachepath.$url)){
-//                dd($address);
-                //有缓存文件直接调用
-                $folder = new Folder();
-
-                if (self::不是标签($address)==false){
-
-
-                    $folder->open( $address); //打开 folder
-                    if (strpos($url,'index.html')!==false){
-
-                        include $cachepath.$url;
-                    }elseif (strpos($url,'.html')!==false){
-                        if (strpos($url,'/')){
-//                                dd($cachepath.$url);
-                            include $cachepath.$url;
-                        }else{
-                            include $address.'/'.$url;
-                        }
-
-                    }elseif (strpos($url,'/')!==false){
-                        include $cachepath.$url.'.html';
-                    }else{
-                        include $cachepath.$url.'/'.$before.'.html';
-
-                    }
-
-                    //获取当前时间戳
-                    exit;
+                    include $cachepath.$url.'/'.$before.'.html';
                 }
+
+                //获取当前时间戳
+                exit;
             }
         }
+
         ob_start(); //开启缓存
     }
 
     static function 不是标签($path){//判断文件夹是否为空
-//        dd($path);
         $i=0;
+
         if($handle=@opendir($path)) {
             while(false!==($file=readdir($handle))){//读取文件夹里的文件
 
                 if($file!="."&&$file!="..") {
 
                     $file_array[$i]["filename"]=$file;
-//                    dd($file);
                     if ($file=='index.html'){
                         $i--;
                     }
@@ -120,6 +59,7 @@ class biaoqian {
             closedir($handle);//关闭文件夹
 
         }
+
 
 
         if($i==0){
@@ -135,20 +75,10 @@ class biaoqian {
         $cachepath = $path.'/public/cache/';
         $content = ob_get_contents();
         //写入到缓存内容到指定的文件夹
-        $before = str_before($url,'/');
-        $address = $cachepath.str_before($before,'.');
+
         if(strpos($url,'index.html')!==false){
+
             $fp = fopen($cachepath.$url,'w');
-
-        }elseif (strpos($url,'.html')!==false){
-            if (strpos($url,'/')){
-                $fp = fopen($cachepath.$url,'w');
-            }else{
-                $fp = fopen($address.'/'.$url,'w');
-            }
-
-        }elseif (strpos($url,'/')!==false){
-            $fp = fopen($cachepath.$url.'.html','w');
         }else{
             $fp = fopen($cachepath.$url.'/'.$url.'.html','w');
         }
@@ -158,7 +88,6 @@ class biaoqian {
         ob_flush(); //从PHP内存中释放出来缓存（取出数据）
         flush(); //把释放的数据发送到浏览器显示
         ob_end_clean(); //清空缓冲区的内容并关闭这个缓冲区
-
     }
 
 
@@ -190,14 +119,6 @@ class biaoqian {
 
     static function 时间(){    //年-月-日
         return  date('Y-m-d');
-    }
-
-    static function url2(){
-        return  self::com('data/url2');
-    }
-
-    static function url1(){
-        return  self::com('data/url1');
     }
 
     static function deletespace($url)
@@ -244,15 +165,6 @@ class biaoqian {
         $end = strtotime(date('Y-m-d H:i:s'));
         $timestamp = rand($begin, $end);
         return date("Y-m-d H:i:s", $timestamp);
-
-    }
-
-    static function 随机日期(){        //获取三天内的随机时间,年-月-日 小时:分:秒
-        $begintime = date('Y-m-d' , strtotime("-3 day"));
-        $begin = strtotime($begintime);
-        $end = strtotime(date('Y-m-d'));
-        $timestamp = rand($begin, $end);
-        return date("Y-m-d", $timestamp);
 
     }
 
@@ -341,9 +253,8 @@ class biaoqian {
             foreach ($keyfile as $key => $item) {
                 $keyword[$key] = $item;
             }
-            $folder->open( base_path().'/public/data/btbf'); //打开 folder
-            $btbf = $folder->getFiles();
-//            dd($btbf);
+            $folder->open( base_path().'/public/'.'data/btbf'); //打开 folder
+            $btbf = $folder->getFolders();
             $whitchfile = $btbf[0];
             $keyfile = file($whitchfile);
 //            $body = $keyword;
