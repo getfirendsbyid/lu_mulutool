@@ -11,11 +11,13 @@ class biaoqian {
 
 
 
+
     static function 开启缓存($url){
 //        dd($url);
         $path = base_path();
         $cachepath = $path.'/public/cache/';
         $num = strripos($url,'/');
+        $filearr = explode('/',$url);
 
         $before = str_before($url,'/');
         if(substr_count($url,'/')>=1){

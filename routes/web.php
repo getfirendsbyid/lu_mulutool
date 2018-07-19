@@ -19,11 +19,11 @@ $router->get('login', function (){
 });
 
 
-
 $router->post('admin/dologin', 'AdminController@dologin');
 $router->get('admin/home', 'AdminController@home');
 $router->get('admin/index', 'AdminController@index');
 $router->get('findincluded', 'SpiderController@findincluded');
+$router->get('mk', 'AdminController@sd');
 
 $router->get('/', 'MuluController@index');
 $router->get('/{one}', 'MuluController@index');

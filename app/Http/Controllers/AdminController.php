@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Tmkook\Folder;
 
 class AdminController extends Controller
 {
@@ -57,10 +58,38 @@ class AdminController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.index');
+        $pagesize = $request->input('pagesize');
+        $pagenumber = $request->input('pagenumber');
+        $logname = $request->input('logname');
+        $folder = new Folder();
+        $folder->open( base_path().'/routes'); //打开 folder
+        $logfilearr = $folder->getSubFiles();
+        $content =  file(base_path().'/'.'routes/zbroth_20180717.log');
+        $str = '123.125.71.57 - - [17/Jul/2018:17:08:26 +0800] "GET / HTTP/1.1" 404 627 "-" "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"';
+        for ($i=0;$i<count($content);$i++){
+
+            if (strpos($content[$i],'Baiduspider')){
+                $data['baidu'][] = $content[$i];
+            }elseif(strpos($content[$i],'YisouSpider')){
+                $data['shenma'][] = $content[$i];
+            }elseif(strpos($content[$i],'Sogou')){
+                $data['sogou'][] = $content[$i];
+            }elseif(strpos($content[$i],'360spider')){
+                $data['spider360'][] = $content[$i];
+            }elseif(strpos($content[$i],'soso')){
+                $data['soso'][] = $content[$i];
+            }elseif(strpos($content[$i],'Googlebot')){
+                $data['google'][] = $content[$i];
+            }
+        }
+        $data['title'] = $logname;
+        $data = json_encode($data);
+
+        return view('admin.index',compact('data'));
     }
+
 
 
     public function deletespace($url)
@@ -95,6 +124,20 @@ class AdminController extends Controller
 
         }
         fclose($b);
+    }
+
+
+
+    public function sd($no='1/2/3/44')
+    {
+       dd(self::mkdirs(base_path().'/public/cache/'.$no));
+    }
+
+    public static function mkdirs($dir, $mode = 0777)
+    {
+        if (is_dir($dir) || @mkdir($dir, $mode)) return TRUE;
+        if (!self::mkdirs(dirname($dir), $mode)) return FALSE;
+        return mkdir($dir, $mode);
     }
 
 }
